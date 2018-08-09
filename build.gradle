@@ -1,0 +1,67 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.2.50'
+        springBootVersion = '2.0.4.RELEASE'
+        mockitoVersion = '1.5.0'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    }
+}
+
+plugins {
+    id 'idea'
+    id 'org.jetbrains.kotlin.plugin.spring' version "1.2.50"
+    id 'org.jetbrains.kotlin.plugin.jpa' version "1.2.50"
+    id "org.jetbrains.kotlin.kapt" version '1.2.50'
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: "kotlin-noarg"
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'ee.swedbank'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
+    compile('org.flywaydb:flyway-core')
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+    runtime('com.h2database:h2')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("com.nhaarman:mockito-kotlin-kt1.1:${mockitoVersion}")
+    testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.3'
+    testCompile group: 'org.powermock', name: 'powermock-api-mockito2', version: '1.7.3'
+}
+
+noArg {
+    annotations("ee.swedbank.fuelconsumptionapp.common.annotation.NoArg")
+}
