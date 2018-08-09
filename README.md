@@ -1,31 +1,32 @@
 Project  API description
 
-Base Entity endpoints:
-    **Show Fuel Consumption**
+Base Entity endpoints
+    
+**Show Fuel Consumption**
     ----
-      Returns json data about a single fuel consumption.
+Returns json data about a single fuel consumption.
     
-    * **URL**
+* **URL**
     
-      /api/fuel_consumption/id
+    /api/fuel_consumption/id
     
-    * **Method:**
+* **Method:**
     
-      `GET`
+        `GET`
       
-    *  **URL Params**
+*  **URL Params**
     
-       **Required:**
+   **Required:**
      
-       `id=[Long]`
+        `id=[Long]`
     
-    * **Data Params**
+* **Data Params**
     
       None
     
-    * **Success Response:**
+* **Success Response:**
     
-      * **Code:** 200 <br />
+    * **Code:** 200 <br />
         **Content:** `{
                           "fuelType": "PETROL_95",
                           "pricePerLitter": 1,
