@@ -30,9 +30,10 @@
                        "date": "2015-05-15",
                        "driverId": 1
                    }`
+* **Error Response:**
 
-* **Code:** 404 NOT FOUND <br />
-    **Content:** `{ "message": "No FuelConsumption found with id: 50" }`
+    * **Code:** 404 NOT FOUND <br />
+        **Content:** `{ "message": "No FuelConsumption found with id: 50" }`
   
 **Get All Fuel Consumption**
 ----
@@ -111,11 +112,44 @@
                         "driverId": 1
                    }`
 
-* **Code:** 422 Unprocessable Entity <br />
-    **Content:** `{
-                      "errorMessage": "Validation failed. 1 error(s)",
-                      "errors": [
-                          "pricePerLitter: must not be 0"
-                      ]
-                  }`
+* **Error Response:**
+
+    * **Code:** 422 Unprocessable Entity <br />
+        **Content:** `{
+                          "errorMessage": "Validation failed. 1 error(s)",
+                          "errors": [
+                              "pricePerLitter: must not be 0"
+                          ]
+                      }`
+                      
+**Delete Fuel Consumption**
+----
+  Deletes fuel consumption by Id.
+
+* **URL**
+
+  /api/fuel_consumption/id
+
+* **Method:**
+
+  `DELETE`
+  
+*  **URL Params**
+
+    **Required:**
+     
+       `id=[Long]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+        None
+
+* **Error Response:**
+
+    * **Code:** 404 NOT FOUND <br />
+        **Content:** `{
+                          "message": "No FuelConsumption found with id: 243"
+                      }`
 
