@@ -138,7 +138,7 @@
 
     **Required:**
      
-       `id=[Long]`
+   `id=[Long]`
 
 * **Success Response:**
 
