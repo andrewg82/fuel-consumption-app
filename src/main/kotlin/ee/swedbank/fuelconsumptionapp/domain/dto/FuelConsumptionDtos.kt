@@ -40,7 +40,8 @@ data class FuelConsumptionUpdateDto(
         @ValidFuelType
         var fuelType: String?,
 
-        @field:Size(min = 0, max = 50)
+        @field:Min(value = 0)
+        @field:Max(value = 50)
         val pricePerLitter: BigDecimal?,
 
         @field:Min(value = 1)

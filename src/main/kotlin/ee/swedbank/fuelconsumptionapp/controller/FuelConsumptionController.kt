@@ -30,7 +30,7 @@ class FuelConsumptionController(
             fuelConsumptionEndpoint.getAllFuelConsumptions()
 
     @PutMapping("/{id}")
-    fun updateFuelConsumption(@RequestBody fuelConsumptionUpdateDto: FuelConsumptionUpdateDto, @PathVariable id: Long): FuelConsumptionDto =
+    fun updateFuelConsumption(@Validated @RequestBody fuelConsumptionUpdateDto: FuelConsumptionUpdateDto, @PathVariable id: Long): FuelConsumptionDto =
             fuelConsumptionEndpoint.updateFuelConsumption(fuelConsumptionUpdateDto, id)
 
     @DeleteMapping("/{id}")
