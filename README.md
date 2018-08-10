@@ -4,7 +4,7 @@
 
 * **URL**
 
-  /api/fuel_consumption/id
+  /api/fuel_consumptions/{id}
 
 * **Method:**
 
@@ -14,7 +14,9 @@
 
    **Required:**
  
-   `id=[Long]`
+   `id[Long]`
+   
+        Example: /api/fuel_consumptions/1
 
 * **Data Params**
 
@@ -41,7 +43,7 @@
 
 * **URL**
 
-  /api/fuel_consumption
+  /api/fuel_consumptions
 
 * **Method:**
 
@@ -81,7 +83,7 @@
 
 * **URL**
 
-  /api/fuel_consumption
+  /api/fuel_consumptions
 
 * **Method:**
 
@@ -128,7 +130,7 @@
 
 * **URL**
 
-  /api/fuel_consumption/bulk
+  /api/fuel_consumptions/bulk
 
 * **Method:**
 
@@ -195,7 +197,7 @@
 
 * **URL**
 
-  /api/fuel_consumption/id
+  /api/fuel_consumptions/{id}
 
 * **Method:**
 
@@ -205,7 +207,9 @@
 
    **Required:**
  
-   `id=[Long]`
+   `id[Long]`
+   
+       Example: /api/fuel_consumptions/1
 
 * **Data Params**
 
@@ -247,7 +251,7 @@
 
 * **URL**
 
-  /api/fuel_consumption/id
+  /api/fuel_consumptions/{id}
 
 * **Method:**
 
@@ -257,7 +261,9 @@
 
     **Required:**
      
-   `id=[Long]`
+   `id[Long]`
+   
+        Example: /api/fuel_consumptions/1
 
 * **Success Response:**
 
@@ -293,6 +299,8 @@
    **Non-required:**
     
     `driverId=[Int]`
+    
+        Example: /api/statistics/total_spent_amount?driverId=1
 
 * **Success Response:**
 
@@ -334,6 +342,8 @@
    **Non-required:**
     
     `driverId=[Int]`
+    
+        Example: /api/statistics/month_statistics?date=2015-06-01&driverId=1
 
 * **Success Response:**
 
@@ -373,7 +383,7 @@
 
 * **URL**
 
-  /api/statistics//aggregated_statistics
+  /api/statistics/aggregated_statistics
 
 * **Method:**
 
@@ -388,6 +398,8 @@
    **Non-required:**
     
     `driverId=[Int]`
+    
+        Example: /api/statistics/aggregated_statistics?driverId=1
 
 * **Success Response:**
 

@@ -7,7 +7,7 @@ object Paths {
 
     private const val API = "/api"
 
-    const val FUEL_CONSUMPTION = "$API/fuel_consumption"
+    const val FUEL_CONSUMPTION = "$API/fuel_consumptions"
 
     const val STATISTICS = "$API/statistics"
 

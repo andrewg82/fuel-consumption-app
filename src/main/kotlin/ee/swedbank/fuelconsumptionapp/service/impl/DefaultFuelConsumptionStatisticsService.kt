@@ -25,7 +25,6 @@ class DefaultFuelConsumptionStatisticsService(
                 throw EntityNotFoundException("There are no records matched your query")
             }
 
-
     override fun getMonthStatistics(fuelConsumptions: List<FuelConsumption>): List<FuelConsumptionStatisticsDto> {
         if (fuelConsumptions.isNotEmpty()) {
             val totalPrices = calculatePrices(fuelConsumptions)

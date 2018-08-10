@@ -55,7 +55,6 @@ class DefaultFuelConsumptionService(
     override fun getAllByMonth(date: LocalDate): List<FuelConsumption> =
             fuelConsumptionRepository.getAllByMonth(date)
 
-
     override fun getAllByMonthAndDriverId(date: LocalDate, driverId: Int): List<FuelConsumption> =
             fuelConsumptionRepository.getAllByMonthAndDriverId(date, driverId)
 }
