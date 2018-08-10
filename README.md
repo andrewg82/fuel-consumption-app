@@ -373,7 +373,7 @@
 
 * **URL**
 
-  /api/statistics/month_statistics
+  /api/statistics//aggregated_statistics
 
 * **Method:**
 
