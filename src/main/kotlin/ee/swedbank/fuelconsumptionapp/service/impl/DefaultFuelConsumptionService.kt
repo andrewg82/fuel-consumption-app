@@ -19,8 +19,8 @@ class DefaultFuelConsumptionService(
             fuelConsumptionRepository.save(fuelConsumption)
 
     @Transactional
-    override fun createFuelConsumptions(fuelConsumptionList: List<FuelConsumption>): List<FuelConsumption> =
-            fuelConsumptionRepository.saveAll(fuelConsumptionList)
+    override fun createFuelConsumptions(fuelConsumptions: List<FuelConsumption>): List<FuelConsumption> =
+            fuelConsumptionRepository.saveAll(fuelConsumptions)
 
     override fun getFuelConsumption(id: Long): FuelConsumption =
             fuelConsumptionRepository.findById(id).orElseThrow { EntityNotFoundException("No FuelConsumption found with id: $id") }

@@ -9,11 +9,11 @@ object Paths {
 
     const val FUEL_CONSUMPTION = "$API/fuel_consumption"
 
-    const val STATISTIC = "$API/statistic"
+    const val STATISTICS = "$API/statistics"
 
     const val TOTAL_SPENT_AMOUNT = "/total_spent_amount"
 
-    const val MONTH_STATISTIC = "/month_statistic"
+    const val MONTH_STATISTICS = "/month_statistics"
 
-    const val AGGREGATED_STATISTIC = "/aggregated_statistic"
+    const val AGGREGATED_STATISTICS = "/aggregated_statistics"
 }

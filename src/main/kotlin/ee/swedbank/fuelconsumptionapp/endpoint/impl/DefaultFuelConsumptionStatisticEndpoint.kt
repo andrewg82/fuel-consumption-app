@@ -1,29 +1,29 @@
 package ee.swedbank.fuelconsumptionapp.endpoint.impl
 
-import ee.swedbank.fuelconsumptionapp.domain.dto.FuelConsumptionStatisticDto
+import ee.swedbank.fuelconsumptionapp.domain.dto.FuelConsumptionStatisticsDto
 import ee.swedbank.fuelconsumptionapp.domain.dto.FuelPrices
-import ee.swedbank.fuelconsumptionapp.endpoint.FuelConsumptionStatisticEndpoint
-import ee.swedbank.fuelconsumptionapp.service.FuelConsumptionStatisticService
+import ee.swedbank.fuelconsumptionapp.endpoint.FuelConsumptionStatisticsEndpoint
+import ee.swedbank.fuelconsumptionapp.service.FuelConsumptionStatisticsService
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
 @Service
-class DefaultFuelConsumptionStatisticEndpoint(
-        private val fuelConsumptionStatisticService: FuelConsumptionStatisticService
-) : FuelConsumptionStatisticEndpoint {
+class DefaultFuelConsumptionStatisticsEndpoint(
+        private val fuelConsumptionStatisticsService: FuelConsumptionStatisticsService
+) : FuelConsumptionStatisticsEndpoint {
 
     override fun getTotalSpentAmountOfMoney(driverId: Int?): Map<LocalDate, Double> {
-        val fuelConsumptions = fuelConsumptionStatisticService.getAllByDriverIdOrAll(driverId)
-        return fuelConsumptionStatisticService.getTotalSpentAmountOfMoney(fuelConsumptions)
+        val fuelConsumptions = fuelConsumptionStatisticsService.getAllByDriverIdOrAll(driverId)
+        return fuelConsumptionStatisticsService.getTotalSpentAmountOfMoney(fuelConsumptions)
     }
 
-    override fun getMonthStatistic(date: LocalDate, driverId: Int?): List<FuelConsumptionStatisticDto> {
-        val fuelConsumptions = fuelConsumptionStatisticService.getAllByMonthAndDriverIdOrAllByMonth(date, driverId)
-        return fuelConsumptionStatisticService.getMonthStatistic(fuelConsumptions)
+    override fun getMonthStatistics(date: LocalDate, driverId: Int?): List<FuelConsumptionStatisticsDto> {
+        val fuelConsumptions = fuelConsumptionStatisticsService.getAllByMonthAndDriverIdOrAllByMonth(date, driverId)
+        return fuelConsumptionStatisticsService.getMonthStatistics(fuelConsumptions)
     }
 
-    override fun getAggregatedStatistic(driverId: Int?): Map<LocalDate, List<FuelPrices>> {
-        val fuelConsumptions = fuelConsumptionStatisticService.getAllByDriverIdOrAll(driverId)
-        return fuelConsumptionStatisticService.getAggregatedStatisticByFuelType(fuelConsumptions)
+    override fun getAggregatedStatistics(driverId: Int?): Map<LocalDate, List<FuelPrices>> {
+        val fuelConsumptions = fuelConsumptionStatisticsService.getAllByDriverIdOrAll(driverId)
+        return fuelConsumptionStatisticsService.getAggregatedStatisticsByFuelType(fuelConsumptions)
     }
 }

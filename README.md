@@ -271,4 +271,172 @@
         **Content:** `{
                           "message": "No FuelConsumption found with id: 243"
                       }`
+                      
+**Get total spent amount of money**
+----
+  Shows total spent amount of money grouped by month. By all drivers or by specified driver.
 
+* **URL**
+
+  /api/statistics/total_spent_amount
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+    **Required:**
+     
+    None
+   
+   **Non-required:**
+    
+    `driverId=[Int]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+  `{
+       "2015-05-01": 1500,
+       "2015-06-01": 1665,
+       "2016-05-01": 1500,
+       "2016-06-01": 1665
+   }`
+
+* **Error Response:**
+
+    * **Code:** 404 NOT FOUND <br />
+        **Content:** `{
+                          "message": "There are no records matched your query"
+                      }`
+
+
+**Get list of fuel consumption records**
+----
+  Shows list of fuel consumption records for specified month. By all drivers or by specified driver.
+
+* **URL**
+
+  /api/statistics/month_statistics
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+    **Required:**
+     
+    `date=[LocalDate], e.g 2015-06-01`
+   
+   **Non-required:**
+    
+    `driverId=[Int]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+  `[
+       {
+           "fuelType": "PETROL_95",
+           "pricePerLitter": 1,
+           "volume": 500,
+           "date": "2015-05-15",
+           "driverId": 1,
+           "totalPrice": 1.5
+       },
+       {
+           "fuelType": "PETROL_95",
+           "pricePerLitter": 2,
+           "volume": 500,
+           "date": "2015-05-20",
+           "driverId": 1,
+           "totalPrice": 1.5
+       }
+   ]`
+
+* **Error Response:**
+
+    * **Code:** 404 NOT FOUND <br />
+        **Content:** `{
+                          "message": "There are no records matched your query"
+                      }`
+                      
+                      
+                      
+**Get aggregated statistics**
+----
+  Shows statistics for each month, list fuel consumption records grouped by fuel type. By all drivers or by specified driver.
+
+* **URL**
+
+  /api/statistics/month_statistics
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+    **Required:**
+     
+    None
+   
+   **Non-required:**
+    
+    `driverId=[Int]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+  `{
+       "2015-05-01": [
+           {
+               "fuelType": "PETROL_95",
+               "totalPrice": 1.5,
+               "averagePrice": 1.5
+           }
+       ],
+       "2015-06-01": [
+           {
+               "fuelType": "PETROL_98",
+               "totalPrice": 1.8,
+               "averagePrice": 1.8
+           },
+           {
+               "fuelType": "PETROL_95",
+               "totalPrice": 1.9,
+               "averagePrice": 1.9
+           }
+       ],
+       "2016-05-01": [
+           {
+               "fuelType": "PETROL_95",
+               "totalPrice": 1.5,
+               "averagePrice": 1.5
+           }
+       ],
+       "2016-06-01": [
+           {
+               "fuelType": "PETROL_98",
+               "totalPrice": 1.8,
+               "averagePrice": 1.8
+           },
+           {
+               "fuelType": "PETROL_95",
+               "totalPrice": 1.9,
+               "averagePrice": 1.9
+           }
+       ]
+   }`
+
+* **Error Response:**
+
+    * **Code:** 404 NOT FOUND <br />
+        **Content:** `{
+                          "message": "There are no records matched your query"
+                      }`

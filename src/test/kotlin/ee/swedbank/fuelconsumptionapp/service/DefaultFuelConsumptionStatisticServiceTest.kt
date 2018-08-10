@@ -2,20 +2,20 @@ package ee.swedbank.fuelconsumptionapp.service
 
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
-import ee.swedbank.fuelconsumptionapp.domain.dto.FuelConsumptionStatisticDto
+import ee.swedbank.fuelconsumptionapp.domain.dto.FuelConsumptionStatisticsDto
 import ee.swedbank.fuelconsumptionapp.domain.dto.FuelPrices
 import ee.swedbank.fuelconsumptionapp.domain.entity.FuelConsumption
 import ee.swedbank.fuelconsumptionapp.domain.entity.FuelType
-import ee.swedbank.fuelconsumptionapp.service.impl.DefaultFuelConsumptionStatisticService
+import ee.swedbank.fuelconsumptionapp.service.impl.DefaultFuelConsumptionStatisticsService
 import org.junit.Before
 import org.junit.Test
 import java.math.BigDecimal
 import java.time.LocalDate
 import javax.persistence.EntityNotFoundException
 
-class DefaultFuelConsumptionStatisticServiceTest {
+class DefaultFuelConsumptionStatisticsServiceTest {
     private lateinit var fuelConsumptionService: FuelConsumptionService
-    private lateinit var defaultFuelConsumptionStatisticService: DefaultFuelConsumptionStatisticService
+    private lateinit var defaultFuelConsumptionStatisticsService: DefaultFuelConsumptionStatisticsService
 
     private val TEST_DATA_ALL = listOf(
             FuelConsumption(
@@ -75,8 +75,8 @@ class DefaultFuelConsumptionStatisticServiceTest {
             LocalDate.of(2018, 5, 1) to 2280.00,
             LocalDate.of(2018, 6, 1) to 1665.00)
 
-    private val EXPECTED_DATA_FOR_MONTH_STATISTIC = listOf(
-            FuelConsumptionStatisticDto(
+    private val EXPECTED_DATA_FOR_MONTH_STatistics = listOf(
+            FuelConsumptionStatisticsDto(
                     fuelType = "PETROL_95",
                     pricePerLitter = BigDecimal.valueOf(1),
                     volume = BigDecimal.valueOf(500),
@@ -84,7 +84,7 @@ class DefaultFuelConsumptionStatisticServiceTest {
                     driverId = 1,
                     totalPrice = BigDecimal.valueOf(1.5)
             ),
-            FuelConsumptionStatisticDto(
+            FuelConsumptionStatisticsDto(
                     fuelType = "PETROL_98",
                     pricePerLitter = BigDecimal.valueOf(1.3),
                     volume = BigDecimal.valueOf(600),
@@ -92,7 +92,7 @@ class DefaultFuelConsumptionStatisticServiceTest {
                     driverId = 2,
                     totalPrice = BigDecimal.valueOf(1.3)
             ),
-            FuelConsumptionStatisticDto(
+            FuelConsumptionStatisticsDto(
                     fuelType = "PETROL_95",
                     pricePerLitter = BigDecimal.valueOf(2),
                     volume = BigDecimal.valueOf(500),
@@ -102,7 +102,7 @@ class DefaultFuelConsumptionStatisticServiceTest {
             )
     )
 
-    private val EXPECTED_DATA_FOR_AGGREGATED_STATISTIC = mapOf<LocalDate, List<FuelPrices>>(
+    private val EXPECTED_DATA_FOR_AGGREGATED_STatistics = mapOf<LocalDate, List<FuelPrices>>(
             LocalDate.of(2018, 5, 1) to listOf(
                     FuelPrices(
                             fuelType = FuelType.PETROL_95,
@@ -132,60 +132,60 @@ class DefaultFuelConsumptionStatisticServiceTest {
     @Before
     fun init() {
         fuelConsumptionService = mock { }
-        defaultFuelConsumptionStatisticService = DefaultFuelConsumptionStatisticService(fuelConsumptionService)
+        defaultFuelConsumptionStatisticsService = DefaultFuelConsumptionStatisticsService(fuelConsumptionService)
     }
 
     @Test(expected = EntityNotFoundException::class)
     fun getTotalSpentAmountOfMoney_ThrowsException_IfEmptyList() {
-        defaultFuelConsumptionStatisticService.getTotalSpentAmountOfMoney(emptyList())
+        defaultFuelConsumptionStatisticsService.getTotalSpentAmountOfMoney(emptyList())
     }
 
     @Test
     fun getTotalSpentAmountOfMoney_Logic() {
-        val expectedData = defaultFuelConsumptionStatisticService.getTotalSpentAmountOfMoney(
+        val expectedData = defaultFuelConsumptionStatisticsService.getTotalSpentAmountOfMoney(
                 TEST_DATA_ALL)
         assert(expectedData == EXPECTED_DATA_FOR_TOTAL_SPENT_AMOUNT)
     }
 
     @Test(expected = EntityNotFoundException::class)
-    fun getMonthStatistic_ThrowsException_IfEmptyList() {
-        defaultFuelConsumptionStatisticService.getMonthStatistic(emptyList())
+    fun getMonthStatistics_ThrowsException_IfEmptyList() {
+        defaultFuelConsumptionStatisticsService.getMonthStatistics(emptyList())
     }
 
     @Test
-    fun getMonthStatistic_Logic() {
-        val expectedData = defaultFuelConsumptionStatisticService.getMonthStatistic(
+    fun getMonthStatistics_Logic() {
+        val expectedData = defaultFuelConsumptionStatisticsService.getMonthStatistics(
                 TEST_DATA_ALL_BY_MONTH)
-        assert(expectedData == EXPECTED_DATA_FOR_MONTH_STATISTIC)
+        assert(expectedData == EXPECTED_DATA_FOR_MONTH_STatistics)
     }
 
     @Test(expected = EntityNotFoundException::class)
-    fun getAggregatedStatisticByFuelType_ThrowsException_IfEmptyList() {
-        defaultFuelConsumptionStatisticService.getAggregatedStatisticByFuelType(emptyList())
+    fun getAggregatedStatisticsByFuelType_ThrowsException_IfEmptyList() {
+        defaultFuelConsumptionStatisticsService.getAggregatedStatisticsByFuelType(emptyList())
     }
 
     @Test
-    fun getAggregatedStatisticByFuelType_Logic() {
-        val expectedData = defaultFuelConsumptionStatisticService.getAggregatedStatisticByFuelType(
+    fun getAggregatedStatisticsByFuelType_Logic() {
+        val expectedData = defaultFuelConsumptionStatisticsService.getAggregatedStatisticsByFuelType(
                 TEST_DATA_ALL)
-        assert(expectedData == EXPECTED_DATA_FOR_AGGREGATED_STATISTIC)
+        assert(expectedData == EXPECTED_DATA_FOR_AGGREGATED_STatistics)
     }
 
     @Test
     fun getAllByDriverIdOrAll_ServiceCall() {
-        defaultFuelConsumptionStatisticService.getAllByDriverIdOrAll(1)
+        defaultFuelConsumptionStatisticsService.getAllByDriverIdOrAll(1)
         verify(fuelConsumptionService).getAllByDriverId(1)
 
-        defaultFuelConsumptionStatisticService.getAllByDriverIdOrAll(null)
+        defaultFuelConsumptionStatisticsService.getAllByDriverIdOrAll(null)
         verify(fuelConsumptionService).getAllFuelConsumptions()
     }
 
     @Test
     fun getAllByMonthAndDriverIdOrAllByMonth_ServiceCall() {
-        defaultFuelConsumptionStatisticService.getAllByMonthAndDriverIdOrAllByMonth(LocalDate.of(2018, 5, 1), 1)
+        defaultFuelConsumptionStatisticsService.getAllByMonthAndDriverIdOrAllByMonth(LocalDate.of(2018, 5, 1), 1)
         verify(fuelConsumptionService).getAllByMonthAndDriverId(LocalDate.of(2018, 5, 1), 1)
 
-        defaultFuelConsumptionStatisticService.getAllByMonthAndDriverIdOrAllByMonth(LocalDate.of(2018, 5, 1), null)
+        defaultFuelConsumptionStatisticsService.getAllByMonthAndDriverIdOrAllByMonth(LocalDate.of(2018, 5, 1), null)
         verify(fuelConsumptionService).getAllByMonth(LocalDate.of(2018, 5, 1))
     }
 }

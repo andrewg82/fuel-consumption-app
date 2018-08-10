@@ -1,21 +1,21 @@
 package ee.swedbank.fuelconsumptionapp.service.impl
 
-import ee.swedbank.fuelconsumptionapp.domain.dto.FuelConsumptionStatisticDto
+import ee.swedbank.fuelconsumptionapp.domain.dto.FuelConsumptionStatisticsDto
 import ee.swedbank.fuelconsumptionapp.domain.dto.FuelPrices
-import ee.swedbank.fuelconsumptionapp.domain.dto.toStatisticDto
+import ee.swedbank.fuelconsumptionapp.domain.dto.toStatisticsDto
 import ee.swedbank.fuelconsumptionapp.domain.entity.FuelConsumption
 import ee.swedbank.fuelconsumptionapp.domain.entity.FuelType
 import ee.swedbank.fuelconsumptionapp.service.FuelConsumptionService
-import ee.swedbank.fuelconsumptionapp.service.FuelConsumptionStatisticService
+import ee.swedbank.fuelconsumptionapp.service.FuelConsumptionStatisticsService
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.time.LocalDate
 import javax.persistence.EntityNotFoundException
 
 @Service
-class DefaultFuelConsumptionStatisticService(
+class DefaultFuelConsumptionStatisticsService(
         private val fuelConsumptionService: FuelConsumptionService
-) : FuelConsumptionStatisticService {
+) : FuelConsumptionStatisticsService {
 
     override fun getTotalSpentAmountOfMoney(fuelConsumptions: List<FuelConsumption>): Map<LocalDate, Double> =
             if (fuelConsumptions.isNotEmpty()) {
@@ -26,19 +26,19 @@ class DefaultFuelConsumptionStatisticService(
             }
 
 
-    override fun getMonthStatistic(fuelConsumptions: List<FuelConsumption>): List<FuelConsumptionStatisticDto> {
+    override fun getMonthStatistics(fuelConsumptions: List<FuelConsumption>): List<FuelConsumptionStatisticsDto> {
         if (fuelConsumptions.isNotEmpty()) {
             val totalPrices = calculatePrices(fuelConsumptions)
 
             return fuelConsumptions.map {
-                it.toStatisticDto(totalPrices)
+                it.toStatisticsDto(totalPrices)
             }
         } else {
             throw EntityNotFoundException("There are no records matched your query")
         }
     }
 
-    override fun getAggregatedStatisticByFuelType(fuelConsumptions: List<FuelConsumption>): Map<LocalDate, List<FuelPrices>> =
+    override fun getAggregatedStatisticsByFuelType(fuelConsumptions: List<FuelConsumption>): Map<LocalDate, List<FuelPrices>> =
             if (fuelConsumptions.isNotEmpty()) {
                 fuelConsumptions.groupBy { it.date.withDayOfMonth(1) }.mapValues { calculatePrices(it.value) }.toSortedMap()
             } else {

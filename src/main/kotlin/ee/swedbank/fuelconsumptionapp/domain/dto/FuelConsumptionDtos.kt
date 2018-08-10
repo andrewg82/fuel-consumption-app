@@ -9,7 +9,6 @@ import java.time.LocalDate
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotNull
-import javax.validation.constraints.Size
 
 data class FuelConsumptionDto(
 
@@ -53,7 +52,7 @@ data class FuelConsumptionUpdateDto(
         val driverId: Int?
 )
 
-data class FuelConsumptionStatisticDto(
+data class FuelConsumptionStatisticsDto(
 
         var fuelType: String,
         val pricePerLitter: BigDecimal,
@@ -83,8 +82,8 @@ fun FuelConsumption.toDto(): FuelConsumptionDto =
                 driverId = this.driverId
         )
 
-fun FuelConsumption.toStatisticDto(fuelPrices: List<FuelPrices>): FuelConsumptionStatisticDto =
-        FuelConsumptionStatisticDto(
+fun FuelConsumption.toStatisticsDto(fuelPrices: List<FuelPrices>): FuelConsumptionStatisticsDto =
+        FuelConsumptionStatisticsDto(
                 fuelType = this.fuelType.toString(),
                 pricePerLitter = this.pricePerLitter,
                 volume = this.volume,

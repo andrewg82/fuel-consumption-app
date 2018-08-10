@@ -7,7 +7,7 @@ import java.time.LocalDate
 interface FuelConsumptionService {
 
     fun createFuelConsumption(fuelConsumption: FuelConsumption): FuelConsumption
-    fun createFuelConsumptions(fuelConsumptionList: List<FuelConsumption>): List<FuelConsumption>
+    fun createFuelConsumptions(fuelConsumptions: List<FuelConsumption>): List<FuelConsumption>
     fun getFuelConsumption(id: Long): FuelConsumption
     fun getAllFuelConsumptions(): List<FuelConsumption>
     fun updateFuelConsumption(fuelConsumptionUpdateDto: FuelConsumptionUpdateDto, id: Long): FuelConsumption
